@@ -26,7 +26,7 @@ pipeline {
       steps {
         echo 'Downloading Model files   '
         echo "The DJ says: ${params.name}"
-        wget -P ${params._id} -O saved_model.pb ${params.url}
+        wget -P '${params._id}' -O saved_model.pb '${params.url}'
       }
     }
   }
