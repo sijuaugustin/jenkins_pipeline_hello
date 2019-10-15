@@ -25,12 +25,12 @@ pipeline {
     stage('Download Model Files') {
       steps {
         echo 'Downloading Model files '
-//         sh "cd /home/hrisheekesh/Workspace"
-//         sh "sudo mkdir ${params.package_name}"
-//         sh "cd ${params.package_name}"
-//         sh "sudo mkdir 1"
-//         sh "cd 1"
-        sh "sudo wget -P ${params._id} -O saved_model.pb ${params.url}"
+    //         sh "cd /home/hrisheekesh/Workspace"
+    //         sh "sudo mkdir ${params.package_name}"
+    //         sh "cd ${params.package_name}"
+    //         sh "sudo mkdir 1"
+    //         sh "cd 1"
+        sh "wget ${params.url}"
 
       }
     }
