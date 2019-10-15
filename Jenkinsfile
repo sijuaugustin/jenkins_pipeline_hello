@@ -30,7 +30,7 @@ pipeline {
     //         sh "cd ${params.package_name}"
     //         sh "sudo mkdir 1"
     //         sh "cd 1"
-        sh "wget ${params.url}"
+        sh "sudo wget ${params.url}"
 
       }
     }
