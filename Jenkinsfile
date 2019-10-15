@@ -1,21 +1,16 @@
-// node {
-//    stage 'Stage 1'
-//    		echo 'Hello World 1'
-//    stage 'Stage 2'
-//    		echo ${env.name}
-// }
 pipeline {
-    agent any
-
-    parameters {
-        booleanParam(defaultValue: true, description: '', name: 'userFlag')
+  agent any
+  parameters {
+    string(name: 'sTrAnGePaRaM',
+      defaultValue: 'Dance!',
+      description: 'Do the funky chicken!')
+  }
+  stages {
+    stage('Example') {
+      steps {
+        echo 'Hello World!'
+        echo "The DJ says: ${params.sTrAnGePaRaM}"
+      }
     }
-
-    stages {
-        stage("foo") {
-            steps {
-                echo "flag: ${params.userFlag}"
-            }
-        }
-    }
+  }
 }
