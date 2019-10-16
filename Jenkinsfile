@@ -22,11 +22,12 @@ pipeline {
 
   }
   stages {
-
-  stage('Checkout'){
+  stage("Checkout"){
+        steps {
         git url: 'https://github.com/sijuaugustin/jenkins_pipeline_hello.git'
         }
-  stage('Download Model Files') {
+        }
+  stage("Download Model Files") {
       steps {
         sh './getModel.sh'
 
