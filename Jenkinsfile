@@ -37,7 +37,7 @@ pipeline {
             echo 'copy the SavedModel to the containers model folder '
             sh "sudo docker cp /home/$USER/${params.package_name} ${params._id}:/models/${params.package_name}"
             echo "commiting the container that's serving the model by changing MODEL_NAME to match the model's name "
-            sh "sudo docker commit --change ""ENV MODEL_NAME ${params.package_name}"" ${params._id} ${params.package_name}"
+            sh "sudo docker commit --change `ENV MODEL_NAME ${params.package_name}` ${params._id} ${params.package_name}"
             sh "sudo docker kill ${params._id}"
 
           }
