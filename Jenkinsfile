@@ -23,13 +23,13 @@ pipeline {
   }
   stages {
 
-      stage("Download Model Files") {
-          steps {
-            echo 'Downloading Model files '
-            sh "sudo mkdir -p /home/$USER/${params.package_name}/1"
-            sh "sudo wget -P /home/$USER/${params.package_name}/1 ${params.url}"
-          }
-        }
+//       stage("Download Model Files") {
+//           steps {
+//             echo 'Downloading Model files '
+//             sh "sudo mkdir -p /home/$USER/${params.package_name}/1"
+//             sh "sudo wget -P /home/$USER/${params.package_name}/1 ${params.url}"
+//           }
+//         }
       stage("TENSORFLOW SERVING") {
           steps {
             echo 'Running TF serving as a daemon '
