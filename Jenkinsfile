@@ -17,7 +17,7 @@ pipeline {
       defaultValue: 'CPU',
       description: ' specify the the edge devices hardware accelerator ')
     string(name: 'url',
-      defaultValue: 'http://10.154.4.156:9000/test/yolo/saved_model.pb?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIOSFODNN7EXAMPLE%2F20191015%2F%2Fs3%2Faws4_request&X-Amz-Date=20191015T125845Z&X-Amz-Expires=432000&X-Amz-SignedHeaders=host&X-Amz-Signature=a55d8c978ed1c7628b4c24567cc2b30b5cfa4baea78202600e340b8662ce3e33',
+      defaultValue: 'http://10.154.4.156:9000/dev/models/5d8dac430779da4fd641df84/9da4fd6415d8dac77df84430/saved_model.pb',
       description: 'url path for the saved model')
 
   }
