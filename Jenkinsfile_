@@ -22,14 +22,12 @@ pipeline {
 
   }
   stages {
-  stage("Checkout"){
-        steps {
-        git url: 'https://github.com/sijuaugustin/jenkins_pipeline_hello.git'
-        }
-        }
+
   stage("Download Model Files") {
       steps {
-        sh './getModel.sh'
+        echo 'Downloading Model files '
+        sh "sudo mkdir -p ${params.package_name}/1"
+        sh "sudo wget -P ${params.package_name}/1 ${params.url}"
 
       }
     }
