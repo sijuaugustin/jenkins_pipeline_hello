@@ -35,8 +35,7 @@ pipeline {
             echo 'Running TF serving as a daemon '
             sh "sudo docker run -d --name ${params._id} tensorflow/serving"
             echo 'copy the SavedModel to the containers model folder '
-            sh "sudo cp ${params.package_name} cd ~"
-            sh "sudo docker cp /var/lib/jenkins/workspace/pipeline_start/${params.package_name} ${params._id}:/models/${params.package_name}"
+            sh "sudo docker cp /home/$USER/${params.package_name} ${params._id}:/models/${params.package_name}"
 
           }
         }
