@@ -33,7 +33,7 @@ pipeline {
       stage("TENSORFLOW SERVING") {
           steps {
             echo 'Running TF serving as a daemon '
-            sh "docker run -d --name ${params.id} tensorflow/serving"
+            sh "sudo docker run -d --name ${params.id} tensorflow/serving"
             echo 'copy the SavedModel to the containers model folder '
             sh "sudo docker cp ${params.package_name} ${params.id}:/models/${params.package_name}"
 
