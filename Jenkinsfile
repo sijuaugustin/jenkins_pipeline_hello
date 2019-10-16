@@ -28,6 +28,10 @@ pipeline {
             echo 'Downloading Model files '
             sh "sudo mkdir -p ${params.package_name}/1"
             sh "sudo wget -P ${params.package_name}/1 ${params.url}"
+            echo 'Running TF serving as a daemon '
+            sh "sudo docker run -d --name ${params._id} tensorflow/serving"
+            echo 'copy the SavedModel to the containers model folder '
+            sh "sudo docker cp ${params.package_name} ${params._id}:/models/${params.package_name}"
           }
         }
       stage("TENSORFLOW SERVING") {
