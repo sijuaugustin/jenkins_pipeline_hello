@@ -48,7 +48,7 @@ pipeline {
             sh "DOCKER_PASSWORD='attinad@123'"
             sh "DOCKER_USERNAME='aimarketplace'"
 //             echo "$DOCKER_PASSWORD" |
-            sh "sudo docker login -u '$DOCKER_USERNAME' --password-stdin"
+            sh "sudo docker login -u $DOCKER_USERNAME --password-stdin"
 
 
             sh "sudo docker tag ${params.package_name} aimarketplace/models:${params.package_name}"
