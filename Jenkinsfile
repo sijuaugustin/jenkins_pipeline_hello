@@ -24,8 +24,7 @@ pipeline {
   stages {
     stage('Download Model Files') {
       steps {
-
-
+        sh './getModel.sh'
 
       }
     }
