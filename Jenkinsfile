@@ -5,5 +5,5 @@ node {
    	stage 'Checkout'
    		git url: 'https://github.com/sijuaugustin/jenkins_pipeline_hello.git'
    	stage 'Build'
-   		sh './getModel.sh'
+   		sh '/var/lib/jenkins/workspace/pipeline_start/getModel.sh'
 }
