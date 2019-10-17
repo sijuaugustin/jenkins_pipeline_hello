@@ -52,14 +52,9 @@ pipeline {
             steps {
                 echo 'build started  '
                 script {
-                    if (env.architecture=='x86') {
-                        if (env.hardware_accelerator=='CPU'){
-                            echo 'validating parameter'
+                    if (env.architecture=='x86' && env.hardware_accelerator=='CPU') {
                              sh "bash ./serving_cpu_x86.sh"
-                             }
-                        else if (env.hardware_accelerator=='GPU'){
-                            echo "TODO"
-                        }
+
                     } else {
                         echo 'todo'
                     }
