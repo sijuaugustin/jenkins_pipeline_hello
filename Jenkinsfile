@@ -38,6 +38,7 @@ pipeline {
         }
       stage("BUILD") {
             steps {
+                echo 'build started  '
                 script {
                     if (${params.architecture}=='x86' && ${params.hardware_accelerator}=='CPU') {
                         sh "bash ./serving_cpu_x86.sh"
