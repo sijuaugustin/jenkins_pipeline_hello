@@ -36,6 +36,7 @@ pipeline {
 //
 //           }
 //         }
+
       stage("BUILD") {
             steps {
                 echo 'build started  '
