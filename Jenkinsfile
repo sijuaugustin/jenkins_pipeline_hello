@@ -39,7 +39,7 @@ pipeline {
       stage("BUILD") {
             steps {
                 script {
-                    if (${params.architecture}=='x86' AND ${params.hardware_accelerator}=='CPU') {
+                    if (${params.architecture}=='x86' && ${params.hardware_accelerator}=='CPU') {
                         sh "bash ./serving_cpu_x86.sh"
                     } else {
                         echo 'todo'
