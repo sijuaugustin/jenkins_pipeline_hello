@@ -21,6 +21,10 @@ pipeline {
       description: 'url path for the saved model')
 
   }
+  environment {
+        DOCKER_PASSWORD='attinad@123'
+        DOCKER_USERNAME='aimarketplace'
+    }
   stages {
 
 //       stage("Download Model Files") {
@@ -45,8 +49,8 @@ pipeline {
       stage("DpckerHub Pusher") {
           steps {
             echo 'Pushing the model package to dockerhub '
-            sh "DOCKER_PASSWORD='attinad@123'"
-            sh "DOCKER_USERNAME='aimarketplace'"
+//             sh "DOCKER_PASSWORD='attinad@123'"
+//             sh "DOCKER_USERNAME='aimarketplace'"
 //             echo 'printing password '$DOCKER_PASSWORD'| sh "sudo docker login -u 'aimarketplace' --password-stdin"
             sh "sudo docker login -u '$DOCKER_USERNAME' --password-stdin"
 
