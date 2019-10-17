@@ -11,7 +11,7 @@ pipeline {
       defaultValue: 'tensorflow',
       description: 'specify the frameworks')
     string(name: 'architecture',
-      defaultValue: 'CPU',
+      defaultValue: 'x86',
       description: 'specify the the edge devices architecture ')
     string(name: 'hardware_accelerator',
       defaultValue: 'CPU',
@@ -28,45 +28,34 @@ pipeline {
     }
   stages {
 
-      stage("bash file running") {
+      stage("PRE-PROCESSING") {
           steps {
-            echo 'bash files running '
-            sh "bash ./getModel.sh"
 
+            echo 'starting PRE-PROCESSING  '
+            sh "bash ./getModel.sh"
 
           }
         }
-//       stage("PRE-PROCESSING") {
-//           steps {
-//             sh "chmod -R 777 ./"
-//             echo 'Downloading Model files '
-//             sh "sudo mkdir -p /home/$USER/${params.package_name}/1"
-//             sh "sudo wget -P /home/$USER/${params.package_name}/1 ${params.url}"
-//
-//
-//           }
-//         }
-//       stage("BUILD | TENSORFLOW SERVING") {
-//           steps {
-//             echo 'Running TF serving as a daemon '
-//             sh "sudo docker run -d --name ${params.id} tensorflow/serving"
-//             echo 'copy the SavedModel to the containers model folder '
-//             sh "sudo docker cp /home/$USER/${params.package_name} ${params.id}:/models/${params.package_name}"
-//             echo "commiting the container that's serving the model by changing MODEL_NAME to match the model's name "
-//             sh "sudo docker commit --change 'ENV MODEL_NAME ${params.package_name}' ${params.id} ${params.package_name}"
-//             sh "sudo docker kill ${params.id}"
-//
-//           }
-//         }
-//       stage("DOCKER HUB PUSHER") {
-//           steps {
-//             echo 'Pushing the model package to dockerhub '
-//             echo ' "$DOCKER_PASSWORD" | sudo docker login -u "$DOCKER_USERNAME" --password-stdin'
-//             sh "sudo docker tag ${params.package_name} aimarketplace/models:${params.package_name}"
-//             sh "sudo docker push aimarketplace/models:${params.package_name}"
-//
-//           }
-//         }
+      stage("BUILD") {
+            steps {
+                script {
+                    if (${params.architecture}=='x86' AND ${params.hardware_accelerator}=='CPU') {
+                        sh "bash ./serving_cpu_x86.sh"
+                    } else {
+                        echo 'todo'
+                    }
+                }
+            }
+        }
+      stage("DOCKER HUB PUSHER") {
+          steps {
+            echo 'Pushing the model package to dockerhub '
+            echo ' "$DOCKER_PASSWORD" | sudo docker login -u "$DOCKER_USERNAME" --password-stdin'
+            sh "sudo docker tag ${params.package_name} aimarketplace/models:${params.package_name}"
+            sh "sudo docker push aimarketplace/models:${params.package_name}"
+
+          }
+        }
 
   }
 }
