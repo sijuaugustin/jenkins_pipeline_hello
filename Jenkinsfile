@@ -40,8 +40,13 @@ pipeline {
             steps {
                 echo 'build started  '
                 script {
-                    if (${params.architecture}=='x86' && ${params.hardware_accelerator}=='CPU') {
-                        sh "bash ./serving_cpu_x86.sh"
+                    if (${params.architecture}=='x86') {
+                        if (${params.hardware_accelerator}=='CPU'){
+                             sh "bash ./serving_cpu_x86.sh"
+                             }
+                        else if (${params.hardware_accelerator}=='GPU'){
+                            echo "TODO"
+                        }
                     } else {
                         echo 'todo'
                     }
