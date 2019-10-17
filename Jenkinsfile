@@ -27,13 +27,13 @@ pipeline {
     }
   stages {
 
-//       stage("Download Model Files") {
-//           steps {
-//             echo 'Downloading Model files '
-//             sh "sudo mkdir -p /home/$USER/${params.package_name}/1"
-//             sh "sudo wget -P /home/$USER/${params.package_name}/1 ${params.url}"
-//           }
-//         }
+      stage("Download Model Files") {
+          steps {
+            echo 'Downloading Model files '
+            sh "sudo mkdir -p /home/$USER/${params.package_name}/1"
+            sh "sudo wget -P /home/$USER/${params.package_name}/1 ${params.url}"
+          }
+        }
       stage("TENSORFLOW SERVING") {
           steps {
             echo 'Running TF serving as a daemon '
@@ -49,14 +49,7 @@ pipeline {
       stage("DpckerHub Pusher") {
           steps {
             echo 'Pushing the model package to dockerhub '
-//             sh "DOCKER_PASSWORD='attinad@123'"
-//             sh "DOCKER_USERNAME='aimarketplace'"
-//             echo 'printing password '$DOCKER_PASSWORD'| sh "sudo docker login -u 'aimarketplace' --password-stdin"
-//             sh "sudo docker login -u $DOCKER_USERNAME --password-stdin"
             echo ' "$DOCKER_PASSWORD" | sudo docker login -u "$DOCKER_USERNAME" --password-stdin'
-
-
-
             sh "sudo docker tag ${params.package_name} aimarketplace/models:${params.package_name}"
             sh "sudo docker push aimarketplace/models:${params.package_name}"
 
