@@ -48,24 +48,24 @@ pipeline {
                 }
             }
             }
-//       stage("BUILD") {
-//             steps {
-//                 echo 'build started  '
-//                 script {
-//                     if (${params.architecture}=='x86') {
-//                         if (${params.hardware_accelerator}=='CPU'){
-//                             echo 'validating parameter'
-//                              sh "bash ./serving_cpu_x86.sh"
-//                              }
-//                         else if (${params.hardware_accelerator}=='GPU'){
-//                             echo "TODO"
-//                         }
-//                     } else {
-//                         echo 'todo'
-//                     }
-//                 }
-//             }
-//         }
+      stage("BUILD") {
+            steps {
+                echo 'build started  '
+                script {
+                    if (env.architecture=='x86') {
+                        if (env.hardware_accelerator=='CPU'){
+                            echo 'validating parameter'
+                             sh "bash ./serving_cpu_x86.sh"
+                             }
+                        else if (env.hardware_accelerator=='GPU'){
+                            echo "TODO"
+                        }
+                    } else {
+                        echo 'todo'
+                    }
+                }
+            }
+        }
       stage("DOCKER HUB PUSHER") {
           steps {
             echo 'Pushing the model package to dockerhub '
