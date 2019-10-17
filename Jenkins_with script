@@ -38,9 +38,15 @@ pipeline {
         }
       stage("BUILD") {
             steps {
-                echo 'build started'
-                sh "bash ./serving_${params.hardware_accelerator}_${params.architecture}.sh"
+                echo 'build started  '
+                script {
+                    if (env.architecture=='x86' && env.hardware_accelerator=='CPU') {
+                             sh "bash ./serving_cpu_x86.sh"
 
+                    } else if (env.architecture=='x86' && env.hardware_accelerator=='GPU') {
+                            sh "bash ./serving_gpu_x86.sh"
+                    }
+                }
             }
         }
       stage("DOCKER HUB PUSHER") {
