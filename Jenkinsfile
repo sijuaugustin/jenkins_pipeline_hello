@@ -4,7 +4,7 @@ pipeline {
     string(name: 'package_name',
       defaultValue: 'helmet_detector_jetson_xavier_beta',
       description: 'detecting helmets')
-    string(name: '_id',
+    string(name: 'id',
       defaultValue: '5d9ef120b7b8et54',
       description: 'unique id')
     string(name: 'framework',
@@ -37,12 +37,12 @@ pipeline {
       stage("TENSORFLOW SERVING") {
           steps {
             echo 'Running TF serving as a daemon '
-            sh "sudo docker run -d --name ${params._id} tensorflow/serving"
+            sh "sudo docker run -d --name ${params.id} tensorflow/serving"
             echo 'copy the SavedModel to the containers model folder '
-            sh "sudo docker cp /home/$USER/${params.package_name} ${params._id}:/models/${params.package_name}"
+            sh "sudo docker cp /home/$USER/${params.package_name} ${params.id}:/models/${params.package_name}"
             echo "commiting the container that's serving the model by changing MODEL_NAME to match the model's name "
-            sh "sudo docker commit --change 'ENV MODEL_NAME ${params.package_name}' ${params._id} ${params.package_name}"
-            sh "sudo docker kill ${params._id}"
+            sh "sudo docker commit --change 'ENV MODEL_NAME ${params.package_name}' ${params.id} ${params.package_name}"
+            sh "sudo docker kill ${params.id}"
 
           }
         }
