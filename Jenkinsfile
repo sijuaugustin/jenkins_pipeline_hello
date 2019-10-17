@@ -28,20 +28,21 @@ pipeline {
     }
   stages {
 
-      stage("PRE-PROCESSING") {
-          steps {
-
-            echo 'starting PRE-PROCESSING  '
-            sh "bash ./getModel.sh"
-
-          }
-        }
+//       stage("PRE-PROCESSING") {
+//           steps {
+//
+//             echo 'starting PRE-PROCESSING  '
+//             sh "bash ./getModel.sh"
+//
+//           }
+//         }
       stage("BUILD") {
             steps {
                 echo 'build started  '
                 script {
                     if (${params.architecture}=='x86') {
                         if (${params.hardware_accelerator}=='CPU'){
+                            echo 'validating parameter'
                              sh "bash ./serving_cpu_x86.sh"
                              }
                         else if (${params.hardware_accelerator}=='GPU'){
