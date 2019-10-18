@@ -19,6 +19,9 @@ pipeline {
     string(name: 'url',
       defaultValue: 'http://10.154.4.156:9000/dev/models/5d8dac430779da4fd641df84/9da4fd6415d8dac77df84430/saved_model.pb',
       description: 'url path for the saved model')
+    string(name: 'target_device',
+      defaultValue: 'INTEL',
+      description: 'url path for the saved model')
 
   }
   environment {
@@ -32,24 +35,20 @@ pipeline {
           steps {
 
             echo 'starting PRE-PROCESSING  '
-            sh "bash ./getModel.sh"
+            sh "bash ./getModelzip.sh"
 
           }
         }
       stage("BUILD") {
             steps {
                 echo 'build started'
-                sh "bash ./serving_${params.hardware_accelerator}_${params.architecture}.sh"
-
+                sh "bash ./serving_${params.hardware_accelerator}_${params.architecture}_${params.target_device}.sh"
             }
         }
       stage("DOCKER HUB PUSHER") {
           steps {
             sh "bash ./dockerhub_push.sh"
-
-
           }
         }
-
   }
 }
