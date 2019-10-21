@@ -35,7 +35,7 @@ pipeline {
           steps {
 
             echo 'starting PRE-PROCESSING  '
-            sh "bash ./getModel.sh"
+            sh "bash ./getModelzip.sh"
 
           }
         }
