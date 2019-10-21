@@ -21,7 +21,7 @@ pipeline {
       description: 'url path for the saved model')
     string(name: 'target_device',
       defaultValue: 'INTEL',
-      description: 'url path for the saved model')
+      description: 'target devie')
 
   }
   environment {
@@ -35,7 +35,7 @@ pipeline {
           steps {
 
             echo 'starting PRE-PROCESSING  '
-            sh "bash ./getModelzip.sh"
+            sh "bash ./getmodelZip.sh"
 
           }
         }
