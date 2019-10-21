@@ -47,8 +47,22 @@ pipeline {
         }
       stage("DOCKER HUB PUSHER") {
           steps {
-            sh "bash ./dockerhub_push.sh"
+            sh "bash ./dockerhubPush.sh"
           }
         }
   }
+
+  post {
+        always {
+            echo 'Model packager results'
+        }
+        success {
+            echo 'Model build was successfull'
+            sh "bash ./cleanData.sh"
+        }
+        failure {
+            echo 'Error in Model Packager building'
+
+        }
+        }
 }
