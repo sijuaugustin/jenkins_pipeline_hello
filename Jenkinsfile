@@ -27,6 +27,7 @@ pipeline {
   environment {
         DOCKER_PASSWORD='attinad@123'
         DOCKER_USERNAME='aimarketplace'
+        DOCKER_REPO='models'
 
     }
   stages {
