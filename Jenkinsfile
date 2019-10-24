@@ -17,7 +17,7 @@ pipeline {
       defaultValue: 'CPU',
       description: ' specify the the edge devices hardware accelerator ')
     string(name: 'url',
-      defaultValue: 'http://10.154.4.156:9000/dev/models/5d8dac430779da4fd641df84/9da4fd6415d8dac77df84430/saved_model.pb',
+      defaultValue: 'http://10.154.4.156:9000/dev/models/5d95977aca366572a6c573fd/5da98c91efa4c055fec11584/yolov3.zip',
       description: 'url path for the saved model')
     string(name: 'target_device',
       defaultValue: 'INTEL',
